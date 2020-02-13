@@ -7,7 +7,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install Development Environment
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3-pip
+        python3-pip \
+        libopencv-core-dev \
+        libopencv-highgui-dev \
+        libopencv-imgproc-dev \
+        libopencv-video-dev \
+        libopencv-calib3d-dev \
+        libopencv-features2d-dev
 
 # Install Python Dependencies
 COPY requirements.txt .
