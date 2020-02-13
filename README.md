@@ -10,9 +10,9 @@ Items in this checklist are required for the development environment:
 3.  Create a Python  [virtual environment](https://virtualenv.pypa.io/en/stable/)  for the project using Virtualenv. This will cause project dependencies to be isolated from your Operating System. Once you create the python environment, enable it before proceeding to the next steps. Ex: You should see ``(env)your-user-name:$`` in the terminal. 
 4. Run ``pip install -r requirements.txt`` to install dependencies.
 5. If you want to run the application in a mode other than *production*, 2 others modes are available:
-**Development**: will be running in 127.0.0.1:3000
-**Production**: will be running in 127.0.0.1:8080
-**Testing**: will be running in 127.0.0.1:8000
+**Development**: will be running in 0.0.0.0:3000
+**Production**: will be running in 0.0.0.0:8080
+**Testing**: will be running in 0.0.0.0:3030
 Right after choosing the mode, change with the name in **/src/app.py**. Please, check **/src/confi.py** for more info. **Production is chosen as default**.
 7. Run ``python src/app.py`` to start app. Make **POST** request.
 
