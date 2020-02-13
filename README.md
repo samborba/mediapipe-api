@@ -28,7 +28,7 @@ Right after choosing the mode, change with the name in **/src/app.py**. Please, 
 at the service endpoint with the video in the header (**video/mp4** as content type) and wait for the response:
 
 Ex:
-![Hand Tracking service endpoint](https://imgur.com/a/X9lDsMu)
+![Hand Tracking service endpoint](mediapipe-api/docs/images/post-request-ht.gif)
 
 ## Notes
 1. If you are not using Linux distribution, I recommend that you use Docker;
