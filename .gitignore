@@ -1,0 +1,9 @@
+# IDE
+.vscode
+
+# Python
+env
+__pycache__/
+
+# Image/Video
+resources/*

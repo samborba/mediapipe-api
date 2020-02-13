@@ -13,4 +13,4 @@ def home_page():
         json -- returns information on how to make a request.
     """
     return jsonify(response="Use the POST method at "
-                            "/mediapipe/<service-name> to apply the mediapipe service.")
+                            "/mediapipe/<service-name>/ to apply the mediapipe service.")
