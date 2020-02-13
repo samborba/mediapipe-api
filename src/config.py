@@ -16,13 +16,13 @@ class DevelopmentConfig(Config):
     ENV = "Development"
     DEBUG = True
     MAX_CONTENT_LENGTH = 50 * 1024 * 1024
-    SERVER_NAME = "127.0.0.1:3000"
+    SERVER_NAME = "0.0.0.0:3000"
 
 
 class TestingConfig(Config):
     ENV = "Testing"
     TESTING = True
-    SERVER_NAME = "127.0.0.1:8000"
+    SERVER_NAME = "0.0.0.0:3030"
 
 
 config = {
