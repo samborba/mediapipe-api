@@ -40,6 +40,6 @@ def create_app(config_name):
     app.register_blueprint(face_detection.blueprint, url_prefix="/mediapipe/facedetection")
     
     from . controller import multi_hand_tracking
-    app.register_blueprint(face_detection.blueprint, url_prefix="/mediapipe/multihandtracking")
+    app.register_blueprint(multi_hand_tracking.blueprint, url_prefix="/mediapipe/multihandtracking")
 
     return app
