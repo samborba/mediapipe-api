@@ -26,8 +26,6 @@ Right after choosing the mode, change with the name in **/src/app.py**. Please, 
 1. Choose your video to be processed and one of the services offered by the API: Hand Tracking, Multi Hand Tracking, Face Detection and Object Detection.
 2. Open an application that tests rest request (Postman, Insomnia, etc) and make a **POST** request   
 at the service endpoint with the video in the header (**video/mp4** as content type) and wait for the response:
-
-Ex:
 ![Hand Tracking service endpoint](docs/images/post-request-ht.gif)
 
 ## Notes
