@@ -12,7 +12,7 @@ def create_app(config_name):
     """Creates Flask Application.
     
     Arguments:
-        config_name {file} -- file containing application settings
+        config_name {str} -- file containing application settings
     
     Returns:
         flask.app -- flask app
@@ -35,11 +35,11 @@ def create_app(config_name):
 
     from .controller import object_detection
     app.register_blueprint(object_detection.blueprint, url_prefix="/mediapipe/objectdetection")
-
-    from .controller import face_detection
-    app.register_blueprint(face_detection.blueprint, url_prefix="/mediapipe/facedetection")
     
-    from . controller import multi_hand_tracking
+    from .controller import multi_hand_tracking
     app.register_blueprint(multi_hand_tracking.blueprint, url_prefix="/mediapipe/multihandtracking")
+    
+    from .controller import gesture_recognition
+    app.register_blueprint(gesture_recognition.blueprint, url_prefix="/recognition/gesture") 
 
     return app
