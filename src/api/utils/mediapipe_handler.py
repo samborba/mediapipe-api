@@ -1,106 +1,76 @@
 import os
-from ctypes import cdll
+import ctypes
 import logging
+
+_HAND_TRACKING_GRAPH = "mediapipe/graphs/hand_tracking/hand_tracking_desktop_live.pbtxt".encode("utf-8")
+_OBJECT_DETECTION_GRAPH = "mediapipe/graphs/hand_tracking/multi_hand_tracking_desktop.pbtxt".encode("utf-8")
+_MULTI_HAND_TRACKING_GRAPH = "mediapipe/graphs/object_detection/object_detection_desktop_tflite_graph.pbtxt".encode("utf-8")
 
 
 class Mediapipe:
-    """Responsible for handling API calls for Media Pipe libraries"""
-
-    def hand_tracking(self):
-        """Calls for Hand Tracking feature.
+    """
+    Responsible for handling API calls for Media Pipe libraries.
+    """
+    def __init__(self):
+        self._func = ctypes.cdll.LoadLibrary(os.path.abspath("src/lib/mediapipe_api_binary.so"))
+        self._func.RunMPPGraph.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
         
-        Raises:
-            FileNotFoundError: multimedia file was not found.
-        Returns:
-            function -- main function from C++ code.
-        """
-        if not os.path.exists("resources/video-input.mp4"):
+
+    def hand_tracking(self, input_video, output_folder):
+        if not os.path.exists(input_video):
             raise FileNotFoundError
         
         if not os.path.exists("mediapipe"):
-            logging.info("Mediapipe not found in this project.")
+            logging.info("Mediapipe main directory at root not found.")
             raise SystemError
         
-        logging.info("Searching for hand_tracking.so (lib) file.")
+        logging.info("Searching for binary file.")
         try:
-            hand_tracking = cdll.LoadLibrary(os.path.abspath("src/lib/hand_tracking.so"))
             logging.info("Found it.")
-            return hand_tracking.main()
-
+            self._func.RunMPPGraph("".encode("utf-8"),
+                                   input_video.encode("utf-8"),
+                                   output_folder.encode("utf-8"),
+                                   _HAND_TRACKING_GRAPH)
+            logging.info("Done.")
         except FileNotFoundError as e:
-            logging.info(e)
+            print(e)
 
 
-    def multi_hand_tracking(self):
-        """Calls for Multi Hand Tracking feature.
-        
-        Raises:
-            FileNotFoundError: multimedia file was not found.
-        Returns:
-            function -- main function from C++ code.
-        """
-        if not os.path.exists("resources/video-input.mp4"):
+    def multi_hand_tracking(self, input_video, output_folder):
+        if not os.path.exists(input_video):
             raise FileNotFoundError
-
+        
         if not os.path.exists("mediapipe"):
-            logging.info("Mediapipe not found in this project.")
+            logging.info("Mediapipe main directory at root not found.")
             raise SystemError
         
-        logging.info("Searching for multi_hand_tracking.so(lib) file.")
+        logging.info("Searching for binary file.")
         try:
-            multi_hand_tracking = cdll.LoadLibrary(os.path.abspath("src/lib/multi_hand_tracking.so"))
             logging.info("Found it.")
-            return multi_hand_tracking.main()
-
+            self._func.RunMPPGraph("".encode("utf-8"),
+                                   input_video.encode("utf-8"),
+                                   output_folder.encode("utf-8"),
+                                   _MULTI_HAND_TRACKING_GRAPH)
+            logging.info("Done.")
         except FileNotFoundError as e:
-            logging.info(e)
+            print(e)
 
 
-    def face_detection(self):
-        """Calls for Face Detection feature.
-        
-        Raises:
-            FileNotFoundError: multimedia file was not found.
-        Returns:
-            function -- main function from C++ code.
-        """
-        if not os.path.exists("resources/video-input.mp4"):
+    def object_detection(self, input_video, output_folder):
+        if not os.path.exists(input_video):
             raise FileNotFoundError
-
+        
         if not os.path.exists("mediapipe"):
-            logging.info("Mediapipe not found in this project.")
+            logging.info("Mediapipe main directory at root not found.")
             raise SystemError
         
-        logging.info("Searching for face_detection.so (lib) file.")
+        logging.info("Searching for binary file.")
         try:
-            face_detection = cdll.LoadLibrary(os.path.abspath("src/lib/face_detection.so"))
             logging.info("Found it.")
-            return face_detection.main()
-
+            self._func.RunMPPGraph("".encode("utf-8"),
+                                   input_video.encode("utf-8"),
+                                   output_folder.encode("utf-8"),
+                                   _OBJECT_DETECTION_GRAPH)
+            logging.info("Done.")
         except FileNotFoundError as e:
-            logging.info(e)
-
-
-    def object_detection(self):
-        """Calls for Multi Hand Tracking feature.
-        
-        Raises:
-            FileNotFoundError: multimedia file was not found.
-        Returns:
-            function -- main function from C++ code.
-        """
-        if not os.path.exists("resources/video-input.mp4"):
-            raise FileNotFoundError
-
-        if not os.path.exists("mediapipe"):
-            logging.info("Mediapipe not found in this project.")
-            raise SystemError
-
-        logging.info("Searching for object_detection.so (lib) file.")
-        try:
-            object_detection = cdll.LoadLibrary(os.path.abspath("src/lib/object_detection.so"))
-            logging.info("Found it.")
-            return object_detection.main()
-
-        except FileNotFoundError as e:
-            logging.info(e)
+            print(e)
